@@ -1,26 +1,46 @@
 package pl.manczak.restapi_nullpointer.config;
 
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
 
-public class Config {
+public class Config{
+    @Autowired
+    private ObjectMapper objectMapper;
 
-    private final ObjectMapper objectMapper;
-
-    public Config(ObjectMapper objectMapper) {
-        this.objectMapper = objectMapper;
-    }
-
-    void customizeObjectMapper(){
-        objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-
-    }
-
+    void customizedObjectMapper(){
+    objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 }
+    }
+
+//public class SwaggerConfiguration {
+//
+//    public Docket getDocket(){
+//        return new Docket(DocumentationType.SWAGGER_2)
+//                .select()
+//                .paths(PathSelectors.any())
+//                .apis(RequestHandlerSelectors.basePackage("pl.manczak.restapi_nullpointer"))
+//                .build()
+//                .apiInfo(apiInfo())
+//                .securitySchemes(Arrays.asList(apikey()));
+//    }
+//
+//    private ApiInfo apiInfo(){
+//        return new ApiInfoBuilder()
+//                .title("Sig-Predict REST API Document")
+//                .description("work in progres")
+//                .termsOfServiceUrl("localhost")
+//                .version("1.0")
+//                .build();
+//    }
+//
+//    private ApiKey apikey(){
+//        return new ApiKey("jwtToken", "Authorization", "header");
+//    }
+//}
