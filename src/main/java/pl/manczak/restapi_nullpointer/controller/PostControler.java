@@ -2,10 +2,7 @@ package pl.manczak.restapi_nullpointer.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.manczak.restapi_nullpointer.controller.dto.PostDto;
 import pl.manczak.restapi_nullpointer.model.Post;
 import pl.manczak.restapi_nullpointer.service.PostService;
@@ -33,9 +30,19 @@ public class PostControler {
 
     }
 
-
     @GetMapping("/posts/{id}")
     public Post getSinglePosts(@PathVariable long id) {
         return postService.getSinglePost(id);
+    }
+
+    @PostMapping("/posts")
+    public Post addPost(@RequestBody Post post){
+        return postService.addPost(post);
+
+    }
+    @PutMapping("/posts")
+    public Post editPost(@RequestBody Post post){
+        return postService.editPost(post);
+
     }
 }
